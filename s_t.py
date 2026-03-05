@@ -13,7 +13,7 @@ st.title("TRADUCTOR.")
 st.subheader("Escucho lo que quieres traducir.")
 
 # MOSTRAR IMAGEN
-st.image("snoopy.jpg", width=300)
+st.image("Snoopy.jpg", width=300)
 
 with st.sidebar:
     st.subheader("Traductor.")
