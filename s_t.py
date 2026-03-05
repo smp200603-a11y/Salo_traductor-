@@ -3,7 +3,6 @@ import streamlit as st
 from bokeh.models.widgets import Button
 from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
-from PIL import Image
 import time
 import glob
 
@@ -13,9 +12,8 @@ from googletrans import Translator
 st.title("TRADUCTOR.")
 st.subheader("Escucho lo que quieres traducir.")
 
-# NUEVA IMAGEN
-image = Image.open('Snoopy.jpg')
-st.image(image, width=300)
+# MOSTRAR IMAGEN
+st.image("snoopy.jpg", width=300)
 
 with st.sidebar:
     st.subheader("Traductor.")
