@@ -13,7 +13,7 @@ st.title("TRADUCTOR.")
 st.subheader("Escucho lo que quieres traducir.")
 
 # MOSTRAR IMAGEN
-image = Image.open("Snoopy.jpg")
+image = Image.open("Snnopy.jpg")
 st.image(image, width=300)
 
 with st.sidebar:
