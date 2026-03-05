@@ -5,16 +5,16 @@ from bokeh.models import CustomJS
 from streamlit_bokeh_events import streamlit_bokeh_events
 import time
 import glob
-
 from gtts import gTTS
 from googletrans import Translator
+from PIL import Image
 
 st.title("TRADUCTOR.")
 st.subheader("Escucho lo que quieres traducir.")
 
 # MOSTRAR IMAGEN
-image=Image.open('Snoopy.jpg')
-st.image("Snoopy.jpg", width=300)
+image = Image.open("Snoopy.jpg")
+st.image(image, width=300)
 
 with st.sidebar:
     st.subheader("Traductor.")
@@ -22,9 +22,9 @@ with st.sidebar:
              "habla lo que quieres traducir, luego selecciona "
              "la configuración de lenguaje que necesites.")
 
-st.write("Toca el Botón y habla lo que quieres traducir")
+st.write("Toca el botón y habla lo que quieres traducir")
 
-stt_button = Button(label=" Escuchar 🎤", width=300, height=50)
+stt_button = Button(label="Escuchar 🎤", width=300, height=50)
 
 stt_button.js_on_event("button_click", CustomJS(code="""
     var recognition = new webkitSpeechRecognition();
@@ -42,10 +42,6 @@ stt_button.js_on_event("button_click", CustomJS(code="""
         if (value != "") {
             document.dispatchEvent(new CustomEvent("GET_TEXT", {detail: value}));
         }
-    }
-
-    recognition.onend = function() {
-        console.log("Reconocimiento detenido");
     }
 
     recognition.start();
@@ -69,13 +65,12 @@ if result:
     except:
         pass
 
-    st.title("Texto a Audio")
     translator = Translator()
 
     text = str(result.get("GET_TEXT"))
 
     in_lang = st.selectbox(
-        "Selecciona el lenguaje de Entrada",
+        "Selecciona el lenguaje de entrada",
         ("Inglés", "Español", "Alemán", "Francés", "Italiano",
          "Bengali", "Coreano", "Mandarín", "Japonés"),
     )
@@ -172,21 +167,21 @@ if result:
 
     display_output_text = st.checkbox("Mostrar el texto")
 
-    if st.button("convertir"):
+    if st.button("Convertir"):
         result, output_text = text_to_speech(input_language, output_language, text, tld)
 
         audio_file = open(f"temp/{result}.mp3", "rb")
         audio_bytes = audio_file.read()
 
-        st.markdown("## Tú audio:")
-        st.audio(audio_bytes, format="audio/mp3", start_time=0)
+        st.markdown("## Tu audio:")
+        st.audio(audio_bytes, format="audio/mp3")
 
         if display_output_text:
             st.markdown("## Texto de salida:")
             st.write(output_text)
 
     def remove_files(n):
-        mp3_files = glob.glob("temp/*mp3")
+        mp3_files = glob.glob("temp/*.mp3")
 
         if len(mp3_files) != 0:
             now = time.time()
